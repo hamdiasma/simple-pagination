@@ -27,11 +27,16 @@ const App = () => {
   const indexOfLastPosts = currentPage * postsPerPage;
   const indexOfFirstPosts = indexOfLastPosts - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPosts, indexOfLastPosts);
+
+  // go to page
+
+  const goToPage = (number) => setCurrentpage(number);
   return (
     <div className="container mt-4">
       <h1 className="text-center">List Of Posts</h1>
+  <div><h5>Page:{currentPage} of {posts.length}</h5></div>
       {isloding ? <Loading /> : <Posts posts={currentPosts} />}
-      <Pagination totalPosts={posts.length} postsPerPage={postsPerPage} />
+      <Pagination totalPosts={posts.length} goToPage={goToPage} postsPerPage={postsPerPage} />
     </div>
   );
 };
