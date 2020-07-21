@@ -1,15 +1,27 @@
-import React from "react";
+import React from 'react';
 
-const Pagination = (props) => {
-  return <div>
-     <nav>
-  <ul className="pagination">
-    {/* <li class="page-item"><a class="page-link" href="#">Previous</a></li> */}
-    <li className="page-item"><a className="page-link" href="#">1</a></li>
-   
-    {/* <li class="page-item"><a class="page-link" href="#">Next</a></li> */}
-  </ul>
-</nav>
-  </div>;
+const Pagination = ({ totalPosts, postsPerPage }) => {
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  console.log(totalPosts)
+
+  return (
+    <div>
+      <nav>
+        <ul className="pagination">
+          {pageNumbers.map((page) => (
+            <li key={page} className="page-item">
+              <a className="page-link" href="#">
+                {page}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  );
 };
 export default Pagination;

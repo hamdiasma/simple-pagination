@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Posts from "./components/Posts";
-import Pagination from "./components/Pagination";
-import Loading from "./components/Loading";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Posts from './components/Posts';
+import Pagination from './components/Pagination';
+import Loading from './components/Loading';
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [isloding, setIsLoading] = useState(false);
@@ -13,9 +13,7 @@ const App = () => {
     setIsLoading(true);
     setTimeout(() => {
       const fetchPots = async () => {
-        const response = await axios.get(
-          "http://jsonplaceholder.typicode.com/posts"
-        );
+        const response = await axios.get('http://jsonplaceholder.typicode.com/posts');
         const result = response.data;
         setPosts(result);
         setIsLoading(false);
@@ -33,7 +31,7 @@ const App = () => {
     <div className="container mt-4">
       <h1 className="text-center">List Of Posts</h1>
       {isloding ? <Loading /> : <Posts posts={currentPosts} />}
-      <Pagination />
+      <Pagination totalPosts={posts.length} postsPerPage={postsPerPage} />
     </div>
   );
 };
