@@ -6,6 +6,8 @@ import Loading from "./components/Loading";
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [isloding, setIsLoading] = useState(false);
+  const [currentPage, setCurrentpage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,13 +21,18 @@ const App = () => {
         setIsLoading(false);
       };
       fetchPots();
-    }, 2000);
+    }, 1000);
   }, []);
+
+  // get current posts
+
+  const indexOfLastPosts = currentPage * postsPerPage;
+  const indexOfFirstPosts = indexOfLastPosts - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPosts, indexOfLastPosts);
   return (
     <div className="container mt-4">
       <h1 className="text-center">List Of Posts</h1>
-
-      {isloding ? <Loading /> : <Posts posts={posts} />}
+      {isloding ? <Loading /> : <Posts posts={currentPosts} />}
       <Pagination />
     </div>
   );
